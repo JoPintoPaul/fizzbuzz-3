@@ -1,8 +1,10 @@
+package com.equalexperts.fb
+
 import org.specs2.mutable.Specification
 
 class FizzBuzzSpec extends Specification {
 
-  "Given a contiguous range of integers, calling generate on a FizzBuzz" should {
+  "Given a contiguous range of integers, calling generate on a com.equalexperts.fb.FizzBuzz" should {
     "return a string with integers containing 3 replaced by lucky" in {
       FizzBuzz().generate(1, 3) must_=== "1 2 lucky lucky: 1 integer: 2"
     }

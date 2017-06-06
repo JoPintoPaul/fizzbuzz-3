@@ -1,3 +1,5 @@
+package com.equalexperts.fb
+
 case class FizzBuzz() {
 
   private val orderForReport = List("fizz", "buzz", "fizzbuzz", "lucky")
@@ -28,7 +30,7 @@ case class FizzBuzz() {
       .groupBy(identity)
       .partition(grouped => orderForReport.contains(grouped._1))
 
-    val replaced: List[String] = orderForReport.flatMap(key => replacements.get(key).map(items => s"$key: ${items.length}"))
+    val replaced: List[String] = orderForReport.flatMap(key => replacements.get(key).map(values => s"$key: ${values.length}"))
     replaced :+ s"integer: ${integers.size}"
   }
 }
