@@ -1,14 +1,16 @@
 case class FizzBuzz() {
 
+  private val orderForReport = List("fizz", "buzz", "fizzbuzz", "lucky")
+
   def generate(start: Int, end: Int): String = {
     if (start > end) s"Invalid range: $start is higher than $end"
     else {
-      val asList = fizzBuzzList(start, end)
-      (asList ++ report(asList)).mkString(" ")
+      val asList = generateFizzBuzzList(start, end)
+      (asList ++ generateReport(asList)).mkString(" ")
     }
   }
 
-  private def fizzBuzzList(start: Int, end: Int): List[String] = {
+  private def generateFizzBuzzList(start: Int, end: Int): List[String] = {
     (start to end map {
       case luckyNumber if luckyNumber.toString.contains("3") => "lucky"
       case nonLuckyNumber =>
@@ -21,14 +23,12 @@ case class FizzBuzz() {
     }).toList
   }
 
-  private def report(fizzBuzzList: List[String]) = {
-    val orderedList = List("fizz", "buzz", "fizzbuzz", "lucky")
-
+  private def generateReport(fizzBuzzList: List[String]) = {
     val (replacements, integers) = fizzBuzzList
       .groupBy(identity)
-      .partition(grouped => orderedList.contains(grouped._1))
+      .partition(grouped => orderForReport.contains(grouped._1))
 
-    val replaced: List[String] = orderedList.flatMap(r => replacements.get(r).map(items => s"$r: ${items.length}"))
+    val replaced: List[String] = orderForReport.flatMap(key => replacements.get(key).map(items => s"$key: ${items.length}"))
     replaced :+ s"integer: ${integers.size}"
   }
 }
